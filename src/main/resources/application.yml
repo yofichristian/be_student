@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:default}
+
+##how to run with mvn
+#mvn spring-boot:run -Dspring-boot.run.arguments="--log.dir=/home/logs --server.port=8000 --logging.file.name=/home/billing.log"
+#java -Dspring.datasource.url=jdbc:postgresql://nemo:5432/billing -Dspring.datasource.username=billing -Dspring.datasource.password=billing -Dspring.kafka.consumer.bootstrap-servers=nemo:9092 -Dspring.kafka.producer.bootstrap-servers=nemo:9092 -Dserver.core=http://nemo:8181/emul/core -Dserver.trace=http://nemo:8181/emul/trace -Dserver.va=http://nemo:8181/emul/va -jar target\billing-service.jar
+

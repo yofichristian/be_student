@@ -1,0 +1,61 @@
+server:
+  port: ${SERVER_PORT:8180}
+  timeout: ${SERVER_TIMEOUT:30000}
+  maxretry: ${SERVER_MAX_RETRY:5}
+#  servlet:
+#    context-path: /auth
+#    encoding:
+#      charset:UTF-8
+#      force-response: true
+
+spring:
+  banner:
+    location: classpath:/banner/banner-base.txt
+
+  application:
+    build-version: '@project.build.number@'
+    time-zone: Asia/Jakarta
+
+  datasource:
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: ${HIKARI_MINIMUM_IDLE:2}
+      maximum-pool-size: ${HIKARI_MAXIMUM_POOL:5}
+      connection-timeout: ${HIKARI_CONNECTION_TIMEOUT:15000}
+      idle-timeout: ${HIKARI_IDLE_TIMEOUT:300000}
+      max-lifetime: ${HIKARI_MAX_LIFETIME:900000}
+      pool-name: ${HIKARI_POOL_NAME:approval-model-pool}
+      auto-commit: ${HIKARI_AUTO_COMMIT:true}
+#    url: jdbc:sqlserver://${DATABASE_URL:10.1.93.205}:${DATASE_PORT:1433};databaseName=${DATABASE_NAME:FRAF};integratedSecurity=false;TrustServerCertificate=true
+#    url: jdbc:postgresql://localhost:5432/testdb?ssl=true&sslmode=verify-ca&sslrootcert=certs/root.crt&sslcert=certs/pg_client.crt&sslkey=certs/pg_client.pk8
+    url: jdbc:postgresql://${DATABASE_URL:localhost}:${DATASE_PORT:5432}/${DATABASE_NAME:demoyofi}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+        naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        jdbc.lob.non_contextual_creation: true
+        jdbc.temp.use_jdbc_metadata_defaults: false
+    open-in-view: false
+
+# always insert data
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+jwt:
+  secret: DEMOYOFIdemoyofiDemoYofiDEMOYOFIdemoyofiDemoYofiDEMOYOFIdemoyofiDemoYofi
+  expiration: 36000000
+
+logging:
+  level:
+    org.springframework.security: trace
+
